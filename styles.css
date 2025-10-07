@@ -5,7 +5,7 @@
 }
 
 body {
-    font-family: 'Arial', sans-serif;
+    font-family: 'system-ui','Arial', sans-serif;
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     min-height: 100vh;
     display: flex;
@@ -56,7 +56,7 @@ h1 {
     cursor: pointer;
     transition: all 0.3s ease;
     box-shadow: 0 5px 15px rgba(255,107,107,0.3);
-    margin: 0 10px;
+    margin: 0 10px 10px;
 }
 
 .game-btn:hover {
@@ -361,4 +361,23 @@ h1 {
 .footer a:hover {
     color: #ffed4e;
     text-decoration: underline;
+}
+
+@media (max-width: 600px) {
+    body{
+        padding: 5px;
+    }
+
+    .game-container{
+        padding: 5px;
+    }
+
+    .bingo-board{
+        gap: 5px;
+    }
+
+    .bingo-cell{
+        font-size: 0.75rem;
+        padding:5px;
+    }
 }
