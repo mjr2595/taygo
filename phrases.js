@@ -50,7 +50,7 @@ const phrases = [
   '"hot take"',
   '"grind"',
   '"rapid fire"',
-  "cursor/windsurf",
+  "cursor",
   '"mcp"',
   '"agentic"',
   "claude",
