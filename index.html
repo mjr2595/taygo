@@ -1,84 +1,132 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Taygo!</title>
-    <link rel="icon" type="image/png" href="images/tay.png">
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-    <h1><img src="images/tay.png" class="title-icon" alt="Tay"> TAYGO! <img src="images/tay.png" class="title-icon" alt="Tay"></h1>
-    
+    <link rel="icon" type="image/png" href="images/tay.png" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <h1>
+      <img src="images/tay.png" class="title-icon" alt="Tay" /> TAYGO!
+      <img src="images/tay.png" class="title-icon" alt="Tay" />
+    </h1>
+
     <div class="game-container">
-        <div class="controls">
-            <button class="game-btn" onclick="generateNewBoard()">🎲 Generate New Board</button>
-            <button class="game-btn help-btn" onclick="openHelpModal()">❓ How to Play</button>
-        </div>
-        
-        <div class="bingo-board" id="bingoBoard">
-            <!-- Board will be generated here -->
-        </div>
+      <div class="controls">
+        <button class="game-btn" onclick="generateNewBoard()">
+          🎲 Generate New Board
+        </button>
+        <button class="game-btn help-btn" onclick="openHelpModal()">
+          ❓ How to Play
+        </button>
+      </div>
+
+      <div class="bingo-board" id="bingoBoard">
+        <!-- Board will be generated here -->
+      </div>
     </div>
 
     <!-- Help Modal -->
     <div id="helpModal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeHelpModal()">&times;</span>
-            <h2>🎯 How to Play Taygo</h2>
-            
-            <h3>🎮 Game Objective</h3>
-            <p>Get <span class="highlight">5 squares in a row</span> (horizontally, vertically, or diagonally) while watching Taylor Desseyn's Guidance Counselor 2.0 podcast!</p>
-            
-            <h3>📺 Watch the Show</h3>
-            <p>Tune in to Taylor Desseyn's <strong>Guidance Counselor 2.0</strong> podcast:</p>
-            <ul>
-                <li><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/taylordesseyn/" target="_blank">@taylordesseyn</a></li>
-                <li><strong>YouTube:</strong> <a href="https://www.youtube.com/@torcdotdev/streams" target="_blank">@torcdotdev streams</a></li>
-            </ul>
-            
-            <h3>🎲 Getting Started</h3>
-            <ul>
-                <li>Click <strong>"Generate New Board"</strong> to create your game card</li>
-                <li>Each column represents T-A-Y-G-O with (not so) random phrases</li>
-                <li>The center square is a <span class="highlight">FREE SPACE</span> ⭐ (automatically marked)</li>
-                <li>Start watching the podcast!</li>
-            </ul>
-            
-            <h3>🎯 How to Play</h3>
-            <ul>
-                <li><strong>Listen carefully</strong> while Taylor talks</li>
-                <li>When Taylor says a word or phrase on your board, <strong>click to mark it</strong></li>
-                <li>Marked squares turn blue with a chip</li>
-                <li>Click again to unmark if you made a mistake</li>
-            </ul>
-            
-            <h3>🏆 Winning</h3>
-            <p>Get 5 marked squares in a line:</p>
-            <ul>
-                <li><strong>Horizontal:</strong> Any complete row</li>
-                <li><strong>Vertical:</strong> Any complete column</li>
-                <li><strong>Diagonal:</strong> Corner to corner (either direction)</li>
-            </ul>
-            <p><strong>When you win:</strong> Comment "TAYGO!" live on the stream! 🎉</p>
-            
-            <h3>💡 Pro Tips</h3>
-            <ul>
-                <li>Keep your board visible while watching</li>
-                <li>Listen for common phrases Taylor uses</li>
-                <li>The FREE SPACE gives you a head start on diagonal wins</li>
-                <li>Generate new boards for multiple games during longer streams</li>
-                <li>Have fun and engage with the community!</li>
-            </ul>
-        </div>
+      <div class="modal-content">
+        <span class="close" onclick="closeHelpModal()">&times;</span>
+        <h2>🎯 How to Play Taygo</h2>
+
+        <h3>🎮 Game Objective</h3>
+        <p>
+          Get <span class="highlight">5 squares in a row</span> (horizontally,
+          vertically, or diagonally) while watching Taylor Desseyn's Guidance
+          Counselor 2.0 podcast!
+        </p>
+
+        <h3>📺 Watch the Show</h3>
+        <p>
+          Tune in to Taylor Desseyn's
+          <strong>Guidance Counselor 2.0</strong> podcast:
+        </p>
+        <ul>
+          <li>
+            <strong>LinkedIn:</strong>
+            <a href="https://www.linkedin.com/in/taylordesseyn/" target="_blank"
+              >@taylordesseyn</a
+            >
+          </li>
+          <li>
+            <strong>YouTube:</strong>
+            <a
+              href="https://www.youtube.com/@torcdotdev/streams"
+              target="_blank"
+              >@torcdotdev streams</a
+            >
+          </li>
+        </ul>
+
+        <h3>🎲 Getting Started</h3>
+        <ul>
+          <li>
+            Click <strong>"Generate New Board"</strong> to create your game card
+          </li>
+          <li>Each column represents T-A-Y-G-O with (not so) random phrases</li>
+          <li>
+            The center square is a <span class="highlight">FREE SPACE</span> ⭐
+            (automatically marked)
+          </li>
+          <li>Start watching the podcast!</li>
+        </ul>
+
+        <h3>🎯 How to Play</h3>
+        <ul>
+          <li><strong>Listen carefully</strong> while Taylor talks</li>
+          <li>
+            When Taylor says a word or phrase on your board,
+            <strong>click to mark it</strong>
+          </li>
+          <li>Marked squares turn blue with a chip</li>
+          <li>Click again to unmark if you made a mistake</li>
+        </ul>
+
+        <h3>🏆 Winning</h3>
+        <p>Get 5 marked squares in a line:</p>
+        <ul>
+          <li><strong>Horizontal:</strong> Any complete row</li>
+          <li><strong>Vertical:</strong> Any complete column</li>
+          <li>
+            <strong>Diagonal:</strong> Corner to corner (either direction)
+          </li>
+        </ul>
+        <p>
+          <strong>When you win:</strong> Comment "TAYGO!" live on the stream! 🎉
+        </p>
+
+        <h3>💡 Pro Tips</h3>
+        <ul>
+          <li>Keep your board visible while watching</li>
+          <li>Listen for common phrases Taylor uses</li>
+          <li>The FREE SPACE gives you a head start on diagonal wins</li>
+          <li>Generate new boards for multiple games during longer streams</li>
+          <li>
+            Have fun and engage with the
+            <a
+              href="https://www.torc.dev/community"
+              target="_blank"
+              rel="noopener noreferrer"
+              >Torc community</a
+            >!
+          </li>
+        </ul>
+      </div>
     </div>
 
     <footer class="footer">
-        <p>This game is <strong>open source</strong>! Help make it more fun on 
-        <a href="https://github.com/mjr2595/taygo" target="_blank">github</a></p>
+      <p>
+        This game is <strong>open source</strong>! Help make it more fun on
+        <a href="https://github.com/mjr2595/taygo" target="_blank">github</a>
+      </p>
     </footer>
 
     <script src="phrases.js"></script>
     <script src="script.js"></script>
-</body>
+  </body>
 </html>
