@@ -129,18 +129,16 @@ function checkForWin() {
 }
 
 function showWinMessage() {
-  const winDiv = document.createElement("div");
-  winDiv.className = "win-message";
-  winDiv.innerHTML = "🎉 TAYGO! 🎉<br>You Won!";
-  document.body.appendChild(winDiv);
+  const winDiv = document.getElementById("winMessage");
+  winDiv.style.display = "block";
 
   // Create confetti effect
   createConfetti();
 
   // Remove win message after animation
   setTimeout(() => {
-    document.body.removeChild(winDiv);
-  }, 3000);
+    winDiv.style.display = "none";
+  }, 10000);
 }
 
 function createConfetti() {
@@ -154,7 +152,7 @@ function createConfetti() {
 
       setTimeout(() => {
         document.body.removeChild(confetti);
-      }, 3000);
+      }, 6000);
     }, i * 100);
   }
 }
