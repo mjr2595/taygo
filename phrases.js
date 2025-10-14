@@ -60,6 +60,8 @@ const phrases = [
   "let's give the people what they want",
   "practical, tactical",
   "unnecessary hand gestures",
+  "open source",
+  "tech twitter",
 ];
 
 // Function to get random phrases for a column
