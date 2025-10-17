@@ -16,6 +16,7 @@ const phrases = [
   "text updates not being spam",
   "we need a part two",
   "cold brew",
+  "coffee",
   "conference talk",
   "dads in tech",
   "recruiters taking 7s to read resume",
@@ -62,6 +63,12 @@ const phrases = [
   "unnecessary hand gestures",
   "open source",
   "tech twitter",
+  "interviewing sucks",
+  "senior, staff, principal engineer",
+  "raise or promotion",
+  "rejection",
+  "vaco",
+  "gun.io",
 ];
 
 // Function to get random phrases for a column
