@@ -175,22 +175,32 @@ h1 {
   display: none;
 }
 
-.win-message {
+.win-modal-content {
+  background: linear-gradient(45deg, #ff6b6b, #ee5a24) !important;
+  color: white;
+  text-align: center;
+  max-width: 800px;
+  min-width: none;
+  padding: 40px 60px;
   position: fixed;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%) scale(0);
-  background: linear-gradient(45deg, #ff6b6b, #ee5a24);
-  color: white;
-  padding: 40px 60px;
+  transform: translate(-50%, -50%);
+  z-index: 2000;
   border-radius: 20px;
-  font-size: 3rem;
-  font-weight: bold;
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-  z-index: 1000;
-  text-align: center;
   opacity: 0;
-  animation: winAnimation 10s ease;
+  animation: winFadeIn 1.25s ease forwards;
+}
+
+.win-modal-content .close {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 2rem;
+}
+
+.win-modal-content .close:hover,
+.win-modal-content .close:focus {
+  color: white;
 }
 
 .win-content {
@@ -202,6 +212,74 @@ h1 {
 
 .win-text {
   text-align: center;
+  font-size: 3rem;
+  font-weight: bold;
+}
+
+
+
+.win-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
+}
+
+.win-text {
+  text-align: center;
+}
+
+.share-btn {
+  background: linear-gradient(45deg, #00d2d3, #01a3a4);
+  color: white;
+  border: none;
+  padding: 12px 25px;
+  font-size: 1rem;
+  font-weight: bold;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 5px 15px rgba(0, 210, 211, 0.3);
+  margin-top: 20px;
+  display: inline-block;
+}
+
+.share-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 210, 211, 0.4);
+}
+
+.share-option-btn {
+  background: linear-gradient(45deg, #4834d4, #686de0);
+  color: white;
+  border: none;
+  padding: 15px 25px;
+  font-size: 1rem;
+  font-weight: bold;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 5px 15px rgba(72, 52, 212, 0.3);
+  margin: 10px;
+  display: block;
+  width: 80%;
+  max-width: 250px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.share-option-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(72, 52, 212, 0.4);
+}
+
+.share-option-btn:first-of-type {
+  background: linear-gradient(45deg, #00d2d3, #01a3a4);
+  box-shadow: 0 5px 15px rgba(0, 210, 211, 0.3);
+}
+
+.share-option-btn:first-of-type:hover {
+  box-shadow: 0 8px 25px rgba(0, 210, 211, 0.4);
 }
 
 .dancing-tay-rex {
@@ -217,25 +295,25 @@ h1 {
   animation: teeterRight 0.8s infinite ease-in-out;
 }
 
-@keyframes winAnimation {
+@keyframes winFadeIn {
   0% {
-    transform: translate(-50%, -50%) scale(0);
     opacity: 0;
-  }
-
-  20% {
-    transform: translate(-50%, -50%) scale(1.2);
-    opacity: 1;
-  }
-
-  80% {
-    transform: translate(-50%, -50%) scale(1);
-    opacity: 1;
+    transform: translate(-50%, -50%) scale(0.9);
   }
 
   100% {
-    transform: translate(-50%, -50%) scale(0);
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+@keyframes winShowAnimation {
+  0% {
     opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
   }
 }
 
@@ -473,5 +551,21 @@ h1 {
 @media (max-width: 375px) {
   .bingo-cell {
     font-size: 0.5rem;
+  }
+
+  .win-modal-content {
+    max-width: 90%;
+    padding: 30px 40px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .win-text {
+    font-size: 2rem;
+  }
+
+  .dancing-tay-rex {
+    width: 60px;
+    height: 60px;
   }
 }
