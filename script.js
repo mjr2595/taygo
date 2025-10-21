@@ -136,19 +136,8 @@ function showWinMessage() {
   createConfetti();
 }
 
-function closeWinMessage(event) {
-  // If no event (called from X button), always close
-  if (!event) {
-    const winDiv = document.getElementById("winMessage");
-    winDiv.style.display = "none";
-    return;
-  }
-
-  // If event target is the modal background itself, close it
-  if (event.target.id === 'winMessage') {
-    const winDiv = document.getElementById("winMessage");
-    winDiv.style.display = "none";
-  }
+function closeWinMessage() {
+  document.getElementById("winMessage").style.display = "none";
 } function createConfetti() {
   for (let i = 0; i < 50; i++) {
     setTimeout(() => {
@@ -312,11 +301,10 @@ function closeHelpModal() {
 
 // Close modal when clicking outside of it
 window.onclick = function (event) {
-  const modal = document.getElementById("helpModal");
-  if (event.target === modal) {
+  const helpModal = document.getElementById("helpModal");
+
+  if (event.target === helpModal) {
     closeHelpModal();
   }
-};
-
-// Initialize the game
+};// Initialize the game
 generateNewBoard();

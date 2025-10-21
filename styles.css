@@ -175,39 +175,48 @@ h1 {
   display: none;
 }
 
-.win-message {
+.win-modal-content {
+  background: linear-gradient(45deg, #ff6b6b, #ee5a24) !important;
+  color: white;
+  text-align: center;
+  max-width: 800px;
+  min-width: none;
+  padding: 40px 60px;
   position: fixed;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%) scale(0);
-  background: linear-gradient(45deg, #ff6b6b, #ee5a24);
-  color: white;
-  padding: 40px 60px;
+  transform: translate(-50%, -50%);
+  z-index: 2000;
   border-radius: 20px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  opacity: 0;
+  animation: winFadeIn 1.25s ease forwards;
+}
+
+.win-modal-content .close {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 2rem;
+}
+
+.win-modal-content .close:hover,
+.win-modal-content .close:focus {
+  color: white;
+}
+
+.win-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
+}
+
+.win-text {
+  text-align: center;
   font-size: 3rem;
   font-weight: bold;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-  z-index: 2000;
-  text-align: center;
-  opacity: 0;
-  animation: winShowAnimation 1s ease forwards;
 }
 
-.win-close {
-  position: absolute;
-  top: 15px;
-  right: 20px;
-  font-size: 2rem;
-  color: rgba(255, 255, 255, 0.8);
-  cursor: pointer;
-  transition: color 0.3s ease;
-  line-height: 1;
-  font-weight: normal;
-}
 
-.win-close:hover {
-  color: white;
-}
 
 .win-content {
   display: flex;
@@ -286,19 +295,24 @@ h1 {
   animation: teeterRight 0.8s infinite ease-in-out;
 }
 
-@keyframes winShowAnimation {
+@keyframes winFadeIn {
   0% {
-    transform: translate(-50%, -50%) scale(0);
     opacity: 0;
-  }
-
-  20% {
-    transform: translate(-50%, -50%) scale(1.2);
-    opacity: 1;
+    transform: translate(-50%, -50%) scale(0.9);
   }
 
   100% {
+    opacity: 1;
     transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+@keyframes winShowAnimation {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
     opacity: 1;
   }
 }
@@ -537,5 +551,21 @@ h1 {
 @media (max-width: 375px) {
   .bingo-cell {
     font-size: 0.5rem;
+  }
+
+  .win-modal-content {
+    max-width: 90%;
+    padding: 30px 40px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .win-text {
+    font-size: 2rem;
+  }
+
+  .dancing-tay-rex {
+    width: 60px;
+    height: 60px;
   }
 }
