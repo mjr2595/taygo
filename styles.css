@@ -187,10 +187,26 @@ h1 {
   font-size: 3rem;
   font-weight: bold;
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-  z-index: 1000;
+  z-index: 2000;
   text-align: center;
   opacity: 0;
-  animation: winAnimation 10s ease;
+  animation: winShowAnimation 1s ease forwards;
+}
+
+.win-close {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  font-size: 2rem;
+  color: rgba(255, 255, 255, 0.8);
+  cursor: pointer;
+  transition: color 0.3s ease;
+  line-height: 1;
+  font-weight: normal;
+}
+
+.win-close:hover {
+  color: white;
 }
 
 .win-content {
@@ -202,6 +218,59 @@ h1 {
 
 .win-text {
   text-align: center;
+}
+
+.share-btn {
+  background: linear-gradient(45deg, #00d2d3, #01a3a4);
+  color: white;
+  border: none;
+  padding: 12px 25px;
+  font-size: 1rem;
+  font-weight: bold;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 5px 15px rgba(0, 210, 211, 0.3);
+  margin-top: 20px;
+  display: inline-block;
+}
+
+.share-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 210, 211, 0.4);
+}
+
+.share-option-btn {
+  background: linear-gradient(45deg, #4834d4, #686de0);
+  color: white;
+  border: none;
+  padding: 15px 25px;
+  font-size: 1rem;
+  font-weight: bold;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 5px 15px rgba(72, 52, 212, 0.3);
+  margin: 10px;
+  display: block;
+  width: 80%;
+  max-width: 250px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.share-option-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(72, 52, 212, 0.4);
+}
+
+.share-option-btn:first-of-type {
+  background: linear-gradient(45deg, #00d2d3, #01a3a4);
+  box-shadow: 0 5px 15px rgba(0, 210, 211, 0.3);
+}
+
+.share-option-btn:first-of-type:hover {
+  box-shadow: 0 8px 25px rgba(0, 210, 211, 0.4);
 }
 
 .dancing-tay-rex {
@@ -217,7 +286,7 @@ h1 {
   animation: teeterRight 0.8s infinite ease-in-out;
 }
 
-@keyframes winAnimation {
+@keyframes winShowAnimation {
   0% {
     transform: translate(-50%, -50%) scale(0);
     opacity: 0;
@@ -228,14 +297,9 @@ h1 {
     opacity: 1;
   }
 
-  80% {
+  100% {
     transform: translate(-50%, -50%) scale(1);
     opacity: 1;
-  }
-
-  100% {
-    transform: translate(-50%, -50%) scale(0);
-    opacity: 0;
   }
 }
 

@@ -134,14 +134,22 @@ function showWinMessage() {
 
   // Create confetti effect
   createConfetti();
-
-  // Remove win message after animation
-  setTimeout(() => {
-    winDiv.style.display = "none";
-  }, 10000);
 }
 
-function createConfetti() {
+function closeWinMessage(event) {
+  // If no event (called from X button), always close
+  if (!event) {
+    const winDiv = document.getElementById("winMessage");
+    winDiv.style.display = "none";
+    return;
+  }
+
+  // If event target is the modal background itself, close it
+  if (event.target.id === 'winMessage') {
+    const winDiv = document.getElementById("winMessage");
+    winDiv.style.display = "none";
+  }
+} function createConfetti() {
   for (let i = 0; i < 50; i++) {
     setTimeout(() => {
       const confetti = document.createElement("div");
@@ -155,6 +163,143 @@ function createConfetti() {
       }, 6000);
     }, i * 100);
   }
+}
+
+function shareBoard() {
+  let shareText = "I got TAYGO! 🎉\n\n";
+
+  // Find winning squares
+  const winningSquares = getWinningSquares();
+
+  // Add the board grid using emoji squares
+  for (let row = 0; row < 5; row++) {
+    let rowText = "";
+    for (let col = 0; col < 5; col++) {
+      const cellKey = `${row}-${col}`;
+      if (markedCells.has(cellKey)) {
+        if (winningSquares.has(cellKey)) {
+          // Winning squares get potato emoji
+          rowText += "🥔";
+        } else {
+          // Other marked cells get dog square
+          rowText += "🐶";
+        }
+      } else {
+        // Unmarked cells get white square
+        rowText += "⬜";
+      }
+    }
+    shareText += rowText + "\n";
+  }
+  copyToClipboard(shareText);
+}
+
+function getWinningSquares() {
+  const winningSquares = new Set();
+
+  // Check rows
+  for (let row = 0; row < 5; row++) {
+    let rowComplete = true;
+    for (let col = 0; col < 5; col++) {
+      if (!markedCells.has(`${row}-${col}`)) {
+        rowComplete = false;
+        break;
+      }
+    }
+    if (rowComplete) {
+      for (let col = 0; col < 5; col++) {
+        winningSquares.add(`${row}-${col}`);
+      }
+      return winningSquares;
+    }
+  }
+
+  // Check columns
+  for (let col = 0; col < 5; col++) {
+    let colComplete = true;
+    for (let row = 0; row < 5; row++) {
+      if (!markedCells.has(`${row}-${col}`)) {
+        colComplete = false;
+        break;
+      }
+    }
+    if (colComplete) {
+      for (let row = 0; row < 5; row++) {
+        winningSquares.add(`${row}-${col}`);
+      }
+      return winningSquares;
+    }
+  }
+
+  // Check diagonal (top-left to bottom-right)
+  let diagonal1Complete = true;
+  for (let i = 0; i < 5; i++) {
+    if (!markedCells.has(`${i}-${i}`)) {
+      diagonal1Complete = false;
+      break;
+    }
+  }
+  if (diagonal1Complete) {
+    for (let i = 0; i < 5; i++) {
+      winningSquares.add(`${i}-${i}`);
+    }
+    return winningSquares;
+  }
+
+  // Check diagonal (top-right to bottom-left)
+  let diagonal2Complete = true;
+  for (let i = 0; i < 5; i++) {
+    if (!markedCells.has(`${i}-${4 - i}`)) {
+      diagonal2Complete = false;
+      break;
+    }
+  }
+  if (diagonal2Complete) {
+    for (let i = 0; i < 5; i++) {
+      winningSquares.add(`${i}-${4 - i}`);
+    }
+    return winningSquares;
+  }
+
+  return winningSquares;
+}
+
+function copyToClipboard(text) {
+  // Create a temporary textarea element
+  const textarea = document.createElement('textarea');
+  textarea.value = text;
+  textarea.style.position = 'fixed';
+  textarea.style.opacity = '0';
+  document.body.appendChild(textarea);
+
+  // Select and copy the text
+  textarea.select();
+  textarea.setSelectionRange(0, 99999); // For mobile devices
+
+  try {
+    document.execCommand('copy');
+    // Show success feedback
+    showCopyFeedback();
+  } catch (err) {
+    console.error('Failed to copy text: ', err);
+    // Fallback: show the text for manual copying
+    alert('Copy this text to share:\n\n' + text);
+  }
+
+  // Clean up
+  document.body.removeChild(textarea);
+}
+
+function showCopyFeedback() {
+  const shareBtn = document.querySelector('.share-btn');
+  const originalText = shareBtn.textContent;
+  shareBtn.textContent = '✅ Copied!';
+  shareBtn.style.background = 'linear-gradient(45deg, #27ae60, #2ecc71)';
+
+  setTimeout(() => {
+    shareBtn.textContent = originalText;
+    shareBtn.style.background = 'linear-gradient(45deg, #00d2d3, #01a3a4)';
+  }, 2000);
 }
 
 function openHelpModal() {

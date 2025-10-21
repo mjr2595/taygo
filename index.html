@@ -80,19 +80,30 @@
     </div>
 
     <!-- Win Message -->
-    <div id="winMessage" class="win-message" style="display: none">
-      <div class="win-content">
-        <img
-          src="images/tay-rex.png"
-          alt="Dancing Tay-Rex"
-          class="dancing-tay-rex dancing-left"
-        />
-        <div class="win-text">TAYGO!<br /></div>
-        <img
-          src="images/tay-rex.png"
-          alt="Dancing Tay-Rex"
-          class="dancing-tay-rex dancing-right"
-        />
+    <div
+      id="winMessage"
+      class="win-message"
+      style="display: none"
+      onclick="closeWinMessage(event)"
+    >
+      <div class="win-modal-content" onclick="event.stopPropagation()">
+        <span class="win-close" onclick="closeWinMessage()">&times;</span>
+        <div class="win-content">
+          <img
+            src="images/tay-rex.png"
+            alt="Dancing Tay-Rex"
+            class="dancing-tay-rex dancing-left"
+          />
+          <div class="win-text">
+            TAYGO!<br />
+            <button class="share-btn" onclick="shareBoard()">📋 Share</button>
+          </div>
+          <img
+            src="images/tay-rex.png"
+            alt="Dancing Tay-Rex"
+            class="dancing-tay-rex dancing-right"
+          />
+        </div>
       </div>
     </div>
 
