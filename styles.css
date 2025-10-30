@@ -538,6 +538,30 @@ h1 {
   line-height: 1.4;
 }
 
+.error-message {
+  color: #e74c3c;
+  font-size: 0.9rem;
+  margin-top: 5px;
+  font-weight: normal;
+  animation: errorShake 0.5s ease;
+}
+
+@keyframes errorShake {
+
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+
+  25% {
+    transform: translateX(-5px);
+  }
+
+  75% {
+    transform: translateX(5px);
+  }
+}
+
 .footer {
   margin-top: 40px;
   padding: 20px;
