@@ -299,12 +299,56 @@ function closeHelpModal() {
   document.getElementById("helpModal").style.display = "none";
 }
 
+function openSubmissionModal() {
+  document.getElementById("submissionModal").style.display = "block";
+}
+
+function closeSubmissionModal() {
+  document.getElementById("submissionModal").style.display = "none";
+}
+
+function submitPhrase() {
+  const phrase = document.getElementById("phraseInput").value.trim();
+
+  if (!phrase) {
+    alert("Please enter a phrase!");
+    return;
+  }
+
+  const FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLSf9CX3v62hp0xEV3k6S4gSpATOsX0q2ETD9Fd4BsZWkw5pxqg/formResponse";
+  const PHRASE_FIELD_ID = "entry.84924091";
+
+  // Submit to Google Forms
+  const formData = new FormData();
+  formData.append(PHRASE_FIELD_ID, phrase);
+
+  fetch(FORM_URL, {
+    method: "POST",
+    body: formData,
+    mode: "no-cors" // Required for Google Forms
+  }).then(() => {
+    // Show success message
+    alert("Thanks for your submission! 🎉\n\nPhrase: " + phrase);
+    closeSubmissionModal();
+    document.getElementById("submissionForm").reset();
+  }).catch((error) => {
+    console.error("Error submitting form:", error);
+    // Fallback success message (no-cors mode means we can't detect actual success)
+    alert("Uh oh spaghetti-os! There was an issue submitting your phrase, maybe we still got it 🤷\n\nPhrase: " + phrase);
+    closeSubmissionModal();
+    document.getElementById("submissionForm").reset();
+  });
+}
+
 // Close modal when clicking outside of it
 window.onclick = function (event) {
   const helpModal = document.getElementById("helpModal");
+  const submissionModal = document.getElementById("submissionModal");
 
   if (event.target === helpModal) {
     closeHelpModal();
+  } else if (event.target === submissionModal) {
+    closeSubmissionModal();
   }
 };// Initialize the game
 generateNewBoard();
