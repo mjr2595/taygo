@@ -299,12 +299,91 @@ function closeHelpModal() {
   document.getElementById("helpModal").style.display = "none";
 }
 
+function openSubmissionModal() {
+  document.getElementById("submissionModal").style.display = "block";
+}
+
+function closeSubmissionModal() {
+  document.getElementById("submissionModal").style.display = "none";
+}
+
+function submitPhrase() {
+  const phrase = document.getElementById("phraseInput").value.trim();
+  const submitBtn = document.querySelector('#submissionForm .game-btn');
+  const errorDiv = document.getElementById('phraseError');
+
+  // Clear any existing error
+  if (errorDiv) {
+    errorDiv.remove();
+  }
+
+  if (!phrase) {
+    // Show red error text under the label
+    const formGroup = document.querySelector('.form-group');
+    const errorMsg = document.createElement('div');
+    errorMsg.id = 'phraseError';
+    errorMsg.className = 'error-message';
+    errorMsg.textContent = 'This field is required duh';
+    formGroup.appendChild(errorMsg);
+    return;
+  }
+
+  // Update button to show submitting state
+  const originalText = submitBtn.textContent;
+  const originalBackground = submitBtn.style.background;
+  submitBtn.textContent = 'Submitting...';
+  submitBtn.disabled = true;
+
+  const FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLSf9CX3v62hp0xEV3k6S4gSpATOsX0q2ETD9Fd4BsZWkw5pxqg/formResponse";
+  const PHRASE_FIELD_ID = "entry.84924091";
+
+  // Submit to Google Forms
+  const formData = new FormData();
+  formData.append(PHRASE_FIELD_ID, phrase);
+
+  fetch(FORM_URL, {
+    method: "POST",
+    body: formData,
+    mode: "no-cors" // Required for Google Forms
+  }).then(() => {
+    // Show success state
+    submitBtn.textContent = 'Submitted! ✅';
+    submitBtn.style.background = 'linear-gradient(45deg, #27ae60, #2ecc71)';
+
+    // Reset form but keep modal open for more submissions
+    setTimeout(() => {
+      document.getElementById("submissionForm").reset();
+      // Reset button state
+      submitBtn.textContent = originalText;
+      submitBtn.style.background = originalBackground;
+      submitBtn.disabled = false;
+    }, 1500);
+  }).catch((error) => {
+    console.error("Error submitting form:", error);
+    // Show success anyway (no-cors mode means we can't detect actual success)
+    submitBtn.textContent = 'Submitted! ✅';
+    submitBtn.style.background = 'linear-gradient(45deg, #27ae60, #2ecc71)';
+
+    // Reset form but keep modal open for more submissions
+    setTimeout(() => {
+      document.getElementById("submissionForm").reset();
+      // Reset button state
+      submitBtn.textContent = originalText;
+      submitBtn.style.background = originalBackground;
+      submitBtn.disabled = false;
+    }, 1500);
+  });
+}
+
 // Close modal when clicking outside of it
 window.onclick = function (event) {
   const helpModal = document.getElementById("helpModal");
+  const submissionModal = document.getElementById("submissionModal");
 
   if (event.target === helpModal) {
     closeHelpModal();
+  } else if (event.target === submissionModal) {
+    closeSubmissionModal();
   }
 };// Initialize the game
 generateNewBoard();

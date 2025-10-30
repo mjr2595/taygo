@@ -77,6 +77,12 @@
       <div class="bingo-board" id="bingoBoard">
         <!-- Board will be generated here -->
       </div>
+
+      <div style="text-align: center; margin-top: 20px">
+        <button class="game-btn help-btn" onclick="openSubmissionModal()">
+          💡 Submit a Taylor-ism or phrase
+        </button>
+      </div>
     </div>
 
     <!-- Win Message -->
@@ -189,6 +195,40 @@
             ✨
           </li>
         </ul>
+      </div>
+    </div>
+
+    <!-- Submission Modal -->
+    <div id="submissionModal" class="modal">
+      <div class="modal-content">
+        <span class="close" onclick="closeSubmissionModal()">&times;</span>
+        <h2>💡 Submit a Phrase</h2>
+
+        <form id="submissionForm">
+          <div class="form-group">
+            <label for="phraseInput" class="form-label">
+              Whatcha got? (keep it short)</label
+            >
+            <input
+              type="text"
+              id="phraseInput"
+              class="form-input"
+              placeholder="e.g., 'Hey I'm Taylor blah blah blah'"
+              maxlength="50"
+              required
+            />
+          </div>
+
+          <div class="form-submit">
+            <button type="button" class="game-btn" onclick="submitPhrase()">
+              Submit
+            </button>
+          </div>
+        </form>
+
+        <p class="form-disclaimer">
+          Don't be a goof and send anything inappropriate k?
+        </p>
       </div>
     </div>
 
