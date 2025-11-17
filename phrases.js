@@ -69,6 +69,18 @@ const phrases = [
   "rejection",
   "vaco",
   "gun.io",
+  "linkedin",
+  "let's dive in",
+  "cut through the noise",
+  "screenshare",
+  "engagement",
+  "south carolina",
+  "nashville",
+  "here's what I would do",
+  "job search",
+  "a bad metaphor",
+  "not handy",
+  "kubernetes",
 ];
 
 // Function to get random phrases for a column
