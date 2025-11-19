@@ -6,10 +6,16 @@ An interactive bingo-style game designed to be played while watching Taylor Dess
 
 ## Where to Watch
 
+<img src="images/taylor/tay.png" alt="TAYGO" width="100" align="left" style="margin-right: 20px;">
+
 **Taylor Desseyn:**
 
 - **LinkedIn:** [taylordesseyn](https://www.linkedin.com/in/taylordesseyn/)
 - **YouTube:** [@torcdotdev](https://www.youtube.com/@torcdotdev/streams)
+
+<br clear="left">
+
+<img src="images/jason/json-head.png" alt="JAYGO" width="100" align="left" style="margin-right: 20px;">
 
 **Jason Torres:**
 
@@ -20,7 +26,8 @@ An interactive bingo-style game designed to be played while watching Taylor Dess
 
 Join the [Torc Discord](https://discord.gg/torc) to connect with other Torcers and get involved in the chaos!
 
-PRs and issues welcome btw
+## Tips
 
-![TAYGO](images/taylor/tay.png)
-![JAYGO](images/jason/json-head.png)
+- Add `?jaygo` to the URL to persist Jaygo mode on refresh
+
+PRs and issues welcome btw
