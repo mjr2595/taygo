@@ -9,4 +9,4 @@ An interactive bingo-style game designed to be played while watching Taylor Dess
 
 PRs and issues welcome!
 
-![TAYGO](images/tay.png)
+![TAYGO](images/taylor/tay.png)

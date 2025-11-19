@@ -19,10 +19,10 @@ body {
 /* Theme Toggle Switch */
 .theme-toggle-container {
   position: fixed;
-  top: 50px;
+  top: 20px;
   left: 20px;
   z-index: 1000;
-  width: 120px;
+  width: 80px;
 }
 
 .theme-toggle-switch {
@@ -269,6 +269,10 @@ h1 {
   display: none;
 }
 
+.jaygo-theme .free-space::before {
+  color: #2c3e50;
+}
+
 .win-modal-content {
   background: linear-gradient(45deg, #ff6b6b, #ee5a24) !important;
   color: white;
@@ -415,12 +419,16 @@ h1 {
   position: fixed;
   width: 80px;
   height: 80px;
-  background-image: url("images/potatayto.webp");
+  background-image: url("images/taylor/potatayto.webp");
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
   top: -30px;
   animation: confetti-fall 3s linear infinite;
+}
+
+.jaygo-theme .confetti {
+  background-image: url("images/jason/croc.png");
 }
 
 @keyframes confetti-fall {
@@ -858,12 +866,12 @@ body.jaygo-theme {
 
 .jaygo-theme .free-space {
   background: linear-gradient(145deg, #ffa502, #ff6348) !important;
-  color: white !important;
+  color: #2c3e50 !important;
   border-color: #ff6348;
 }
 
 .jaygo-theme .free-space.marked {
-  color: white !important;
+  color: #2c3e50 !important;
 }
 
 .jaygo-theme .win-modal-content {

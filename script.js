@@ -8,7 +8,7 @@ function generateNewBoard() {
   currentBoard = [];
   markedCells.clear();
 
-  const letters = ["T", "A", "Y", "G", "O"];
+  const letters = currentTheme === 'jaygo' ? ["J", "A", "Y", "G", "O"] : ["T", "A", "Y", "G", "O"];
   const globalUsedPhrases = new Set();
 
   // Create headers
@@ -156,7 +156,8 @@ function closeWinMessage() {
 }
 
 function shareBoard() {
-  let shareText = "I got TAYGO! 🎉\n\n";
+  const gameText = currentTheme === 'jaygo' ? 'JAYGO' : 'TAYGO';
+  let shareText = `I got ${gameText}! 🎉\n\n`;
 
   // Find winning squares
   const winningSquares = getWinningSquares();
@@ -393,19 +394,87 @@ window.onclick = function (event) {
   const themeToggle = document.getElementById('themeToggle');
   const toggleEmoji = document.getElementById('toggleEmoji');
   const gameTitle = document.getElementById('gameTitle');
+  const winText = document.getElementById('winText');
+  const titleIcon1 = document.getElementById('titleIcon1');
+  const titleIcon2 = document.getElementById('titleIcon2');
+  const winIcon1 = document.getElementById('winIcon1');
+  const winIcon2 = document.getElementById('winIcon2');
+  const favicon = document.getElementById('favicon');
+  const ogImage = document.getElementById('ogImage');
+  const twitterImage = document.getElementById('twitterImage');
 
   if (currentTheme === 'jaygo') {
     body.classList.add('jaygo-theme');
     themeToggle.classList.add('toggled');
-    toggleEmoji.textContent = '👟';
-    gameTitle.innerHTML = '<img src="images/tay.png" class="title-icon" alt="Jay" /> JAYGO! <img src="images/tay.png" class="title-icon" alt="Jay" />';
+    toggleEmoji.textContent = '😈';
+
+    // Update page title
+    document.title = 'Jaygo!';
+
+    // Update images to Jason versions
+    titleIcon1.src = 'images/jason/json-head.png';
+    titleIcon1.alt = 'Jay';
+    titleIcon2.src = 'images/jason/json-head.png';
+    titleIcon2.alt = 'Jay';
+    winIcon1.src = 'images/jason/fellow-kids.png';
+    winIcon1.alt = 'Dancing Jay';
+    winIcon2.src = 'images/jason/fellow-kids.png';
+    winIcon2.alt = 'Dancing Jay';
+    favicon.href = 'images/jason/json-head.png';
+    ogImage.content = 'https://taygo.netlify.app/images/jason/json-head.png';
+    twitterImage.content = 'https://taygo.netlify.app/images/jason/json-head.png';
+
+    // Update title text to JAYGO
+    gameTitle.innerHTML = `
+      <img src="images/jason/json-head.png" class="title-icon" alt="Jay" id="titleIcon1" />
+      JAYGO!
+      <img src="images/jason/json-head.png" class="title-icon" alt="Jay" id="titleIcon2" />
+    `;
+
+    winText.innerHTML = 'JAYGO!<br /><button class="share-btn" onclick="shareBoard()">📋 Share</button>';
   } else {
     body.classList.remove('jaygo-theme');
     themeToggle.classList.remove('toggled');
     toggleEmoji.textContent = '🥔';
-    gameTitle.innerHTML = '<img src="images/tay.png" class="title-icon" alt="Tay" /> TAYGO! <img src="images/tay.png" class="title-icon" alt="Tay" />';
+
+    // Update page title
+    document.title = 'Taygo!';
+
+    // Update images to Taylor versions
+    titleIcon1.src = 'images/taylor/tay.png';
+    titleIcon1.alt = 'Tay';
+    titleIcon2.src = 'images/taylor/tay.png';
+    titleIcon2.alt = 'Tay';
+    winIcon1.src = 'images/taylor/tay-rex.png';
+    winIcon1.alt = 'Dancing Tay-Rex';
+    winIcon2.src = 'images/taylor/tay-rex.png';
+    winIcon2.alt = 'Dancing Tay-Rex';
+    favicon.href = 'images/taylor/tay.png';
+    ogImage.content = 'https://taygo.netlify.app/images/taylor/tay.png';
+    twitterImage.content = 'https://taygo.netlify.app/images/taylor/tay.png';
+
+    // Update title text to TAYGO
+    gameTitle.innerHTML = `
+      <img src="images/taylor/tay.png" class="title-icon" alt="Tay" id="titleIcon1" />
+      TAYGO!
+      <img src="images/taylor/tay.png" class="title-icon" alt="Tay" id="titleIcon2" />
+    `;
+
+    winText.innerHTML = 'TAYGO!<br /><button class="share-btn" onclick="shareBoard()">📋 Share</button>';
+  }
+
+  // Regenerate the board with new letters
+  generateNewBoard();
+}
+
+// Check URL for /jaygo and set initial theme
+function initializeTheme() {
+  const isJaygoUrl = window.location.search.includes('jaygo');
+  if (isJaygoUrl && currentTheme === 'taygo') {
+    toggleTheme();
   }
 }
 
 // Initialize the game
+initializeTheme();
 generateNewBoard();

@@ -35,7 +35,8 @@
     />
     <meta
       property="og:image"
-      content="https://taygo.netlify.app/images/tay.png"
+      content="https://taygo.netlify.app/images/taylor/tay.png"
+      id="ogImage"
     />
     <meta property="og:image:alt" content="Taylor Desseyn's face" />
     <meta property="og:site_name" content="Taygo!" />
@@ -51,11 +52,17 @@
     />
     <meta
       property="twitter:image"
-      content="https://taygo.netlify.app/images/tay.png"
+      content="https://taygo.netlify.app/images/taylor/tay.png"
+      id="twitterImage"
     />
     <meta property="twitter:image:alt" content="Taylor Desseyn's face" />
 
-    <link rel="icon" type="image/png" href="images/tay.png" />
+    <link
+      rel="icon"
+      type="image/png"
+      href="images/taylor/tay.png"
+      id="favicon"
+    />
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
@@ -65,16 +72,23 @@
         <div class="toggle-slider">
           <span class="toggle-emoji" id="toggleEmoji">🥔</span>
         </div>
-        <div class="toggle-labels">
-          <span class="toggle-label left">Taygo</span>
-          <span class="toggle-label right">Jaygo</span>
-        </div>
       </div>
     </div>
 
     <h1 id="gameTitle">
-      <img src="images/tay.png" class="title-icon" alt="Tay" /> TAYGO!
-      <img src="images/tay.png" class="title-icon" alt="Tay" />
+      <img
+        src="images/taylor/tay.png"
+        class="title-icon"
+        alt="Tay"
+        id="titleIcon1"
+      />
+      TAYGO!
+      <img
+        src="images/taylor/tay.png"
+        class="title-icon"
+        alt="Tay"
+        id="titleIcon2"
+      />
     </h1>
 
     <div class="game-container">
@@ -103,18 +117,20 @@
       <span class="close" onclick="closeWinMessage()">&times;</span>
       <div class="win-content">
         <img
-          src="images/tay-rex.png"
+          src="images/taylor/tay-rex.png"
           alt="Dancing Tay-Rex"
           class="dancing-tay-rex dancing-left"
+          id="winIcon1"
         />
-        <div class="win-text">
+        <div class="win-text" id="winText">
           TAYGO!<br />
           <button class="share-btn" onclick="shareBoard()">📋 Share</button>
         </div>
         <img
-          src="images/tay-rex.png"
+          src="images/taylor/tay-rex.png"
           alt="Dancing Tay-Rex"
           class="dancing-tay-rex dancing-right"
+          id="winIcon2"
         />
       </div>
     </div>
