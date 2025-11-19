@@ -1,5 +1,6 @@
 let currentBoard = [];
 let markedCells = new Set();
+let currentTheme = 'taygo'; // 'taygo' or 'jaygo'
 
 function generateNewBoard() {
   const board = document.getElementById("bingoBoard");
@@ -385,5 +386,26 @@ window.onclick = function (event) {
   } else if (event.target === submissionModal) {
     closeSubmissionModal();
   }
-};// Initialize the game
+}; function toggleTheme() {
+  currentTheme = currentTheme === 'taygo' ? 'jaygo' : 'taygo';
+
+  const body = document.body;
+  const themeToggle = document.getElementById('themeToggle');
+  const toggleEmoji = document.getElementById('toggleEmoji');
+  const gameTitle = document.getElementById('gameTitle');
+
+  if (currentTheme === 'jaygo') {
+    body.classList.add('jaygo-theme');
+    themeToggle.classList.add('toggled');
+    toggleEmoji.textContent = '👟';
+    gameTitle.innerHTML = '<img src="images/tay.png" class="title-icon" alt="Jay" /> JAYGO! <img src="images/tay.png" class="title-icon" alt="Jay" />';
+  } else {
+    body.classList.remove('jaygo-theme');
+    themeToggle.classList.remove('toggled');
+    toggleEmoji.textContent = '🥔';
+    gameTitle.innerHTML = '<img src="images/tay.png" class="title-icon" alt="Tay" /> TAYGO! <img src="images/tay.png" class="title-icon" alt="Tay" />';
+  }
+}
+
+// Initialize the game
 generateNewBoard();

@@ -59,7 +59,20 @@
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <h1>
+    <!-- Theme Toggle Switch -->
+    <div class="theme-toggle-container">
+      <div class="theme-toggle-switch" onclick="toggleTheme()" id="themeToggle">
+        <div class="toggle-slider">
+          <span class="toggle-emoji" id="toggleEmoji">🥔</span>
+        </div>
+        <div class="toggle-labels">
+          <span class="toggle-label left">Taygo</span>
+          <span class="toggle-label right">Jaygo</span>
+        </div>
+      </div>
+    </div>
+
+    <h1 id="gameTitle">
       <img src="images/tay.png" class="title-icon" alt="Tay" /> TAYGO!
       <img src="images/tay.png" class="title-icon" alt="Tay" />
     </h1>
