@@ -1,5 +1,6 @@
 let currentBoard = [];
 let markedCells = new Set();
+let currentTheme = 'taygo'; // 'taygo' or 'jaygo'
 
 function generateNewBoard() {
   const board = document.getElementById("bingoBoard");
@@ -7,7 +8,7 @@ function generateNewBoard() {
   currentBoard = [];
   markedCells.clear();
 
-  const letters = ["T", "A", "Y", "G", "O"];
+  const letters = currentTheme === 'jaygo' ? ["J", "A", "Y", "G", "O"] : ["T", "A", "Y", "G", "O"];
   const globalUsedPhrases = new Set();
 
   // Create headers
@@ -155,7 +156,8 @@ function closeWinMessage() {
 }
 
 function shareBoard() {
-  let shareText = "I got TAYGO! 🎉\n\n";
+  const gameText = currentTheme === 'jaygo' ? 'JAYGO' : 'TAYGO';
+  let shareText = `I got ${gameText}! 🎉\n\n`;
 
   // Find winning squares
   const winningSquares = getWinningSquares();
@@ -167,8 +169,8 @@ function shareBoard() {
       const cellKey = `${row}-${col}`;
       if (markedCells.has(cellKey)) {
         if (winningSquares.has(cellKey)) {
-          // Winning squares get potato emoji
-          rowText += "🥔";
+          // Winning squares get different emojis based on theme
+          rowText += currentTheme === 'jaygo' ? "😈" : "🥔";
         } else {
           // Other marked cells get dog square
           rowText += "🐶";
@@ -309,22 +311,44 @@ function closeSubmissionModal() {
 
 function submitPhrase() {
   const phrase = document.getElementById("phraseInput").value.trim();
+  const whoSaysItRadio = document.querySelector('input[name="whoSaysIt"]:checked');
   const submitBtn = document.querySelector('#submissionForm .game-btn');
   const errorDiv = document.getElementById('phraseError');
+  const radioErrorDiv = document.getElementById('radioError');
 
-  // Clear any existing error
+  // Clear any existing errors
   if (errorDiv) {
     errorDiv.remove();
   }
+  if (radioErrorDiv) {
+    radioErrorDiv.remove();
+  }
+
+  let hasError = false;
 
   if (!phrase) {
-    // Show red error text under the label
+    // Show red error text under the phrase input label
     const formGroup = document.querySelector('.form-group');
     const errorMsg = document.createElement('div');
     errorMsg.id = 'phraseError';
     errorMsg.className = 'error-message';
     errorMsg.textContent = 'This field is required duh';
     formGroup.appendChild(errorMsg);
+    hasError = true;
+  }
+
+  if (!whoSaysItRadio) {
+    // Show red error text under the radio group
+    const radioFormGroup = document.querySelector('.form-group:nth-of-type(2)');
+    const radioErrorMsg = document.createElement('div');
+    radioErrorMsg.id = 'radioError';
+    radioErrorMsg.className = 'error-message';
+    radioErrorMsg.textContent = 'Please select who says it';
+    radioFormGroup.appendChild(radioErrorMsg);
+    hasError = true;
+  }
+
+  if (hasError) {
     return;
   }
 
@@ -336,10 +360,12 @@ function submitPhrase() {
 
   const FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLSf9CX3v62hp0xEV3k6S4gSpATOsX0q2ETD9Fd4BsZWkw5pxqg/formResponse";
   const PHRASE_FIELD_ID = "entry.84924091";
+  const WHO_SAYS_IT_FIELD_ID = "entry.1680307727";
 
   // Submit to Google Forms
   const formData = new FormData();
   formData.append(PHRASE_FIELD_ID, phrase);
+  formData.append(WHO_SAYS_IT_FIELD_ID, whoSaysItRadio.value);
 
   fetch(FORM_URL, {
     method: "POST",
@@ -385,5 +411,97 @@ window.onclick = function (event) {
   } else if (event.target === submissionModal) {
     closeSubmissionModal();
   }
-};// Initialize the game
+}; function toggleTheme() {
+  currentTheme = currentTheme === 'taygo' ? 'jaygo' : 'taygo';
+
+  const body = document.body;
+  const themeToggle = document.getElementById('themeToggle');
+  const toggleEmoji = document.getElementById('toggleEmoji');
+  const gameTitle = document.getElementById('gameTitle');
+  const winText = document.getElementById('winText');
+  const titleIcon1 = document.getElementById('titleIcon1');
+  const titleIcon2 = document.getElementById('titleIcon2');
+  const winIcon1 = document.getElementById('winIcon1');
+  const winIcon2 = document.getElementById('winIcon2');
+  const favicon = document.getElementById('favicon');
+  const ogImage = document.getElementById('ogImage');
+  const twitterImage = document.getElementById('twitterImage');
+  const submissionBtn = document.getElementById('submissionBtn');
+
+  if (currentTheme === 'jaygo') {
+    body.classList.add('jaygo-theme');
+    themeToggle.classList.add('toggled');
+    toggleEmoji.textContent = '😈';
+
+    // Update page title
+    document.title = 'Jaygo!';
+
+    // Update images to Jason versions
+    titleIcon1.src = 'images/jason/json-head.png';
+    titleIcon1.alt = 'Jay';
+    titleIcon2.src = 'images/jason/json-head.png';
+    titleIcon2.alt = 'Jay';
+    winIcon1.src = 'images/jason/fellow-kids.png';
+    winIcon1.alt = 'Dancing Jay';
+    winIcon2.src = 'images/jason/fellow-kids.png';
+    winIcon2.alt = 'Dancing Jay';
+    favicon.href = 'images/jason/json-head.png';
+    ogImage.content = 'https://taygo.netlify.app/images/jason/json-head.png';
+    twitterImage.content = 'https://taygo.netlify.app/images/jason/json-head.png';
+
+    // Update title text to JAYGO
+    gameTitle.innerHTML = `
+      <img src="images/jason/json-head.png" class="title-icon" alt="Jay" id="titleIcon1" />
+      JAYGO!
+      <img src="images/jason/json-head.png" class="title-icon" alt="Jay" id="titleIcon2" />
+    `;
+
+    winText.innerHTML = 'JAYGO!<br /><button class="share-btn" onclick="shareBoard()">📋 Share</button>';
+    submissionBtn.innerHTML = '💡 Submit a Jason-ism or phrase';
+  } else {
+    body.classList.remove('jaygo-theme');
+    themeToggle.classList.remove('toggled');
+    toggleEmoji.textContent = '🥔';
+
+    // Update page title
+    document.title = 'Taygo!';
+
+    // Update images to Taylor versions
+    titleIcon1.src = 'images/taylor/tay.png';
+    titleIcon1.alt = 'Tay';
+    titleIcon2.src = 'images/taylor/tay.png';
+    titleIcon2.alt = 'Tay';
+    winIcon1.src = 'images/taylor/tay-rex.png';
+    winIcon1.alt = 'Dancing Tay-Rex';
+    winIcon2.src = 'images/taylor/tay-rex.png';
+    winIcon2.alt = 'Dancing Tay-Rex';
+    favicon.href = 'images/taylor/tay.png';
+    ogImage.content = 'https://taygo.netlify.app/images/taylor/tay.png';
+    twitterImage.content = 'https://taygo.netlify.app/images/taylor/tay.png';
+
+    // Update title text to TAYGO
+    gameTitle.innerHTML = `
+      <img src="images/taylor/tay.png" class="title-icon" alt="Tay" id="titleIcon1" />
+      TAYGO!
+      <img src="images/taylor/tay.png" class="title-icon" alt="Tay" id="titleIcon2" />
+    `;
+
+    winText.innerHTML = 'TAYGO!<br /><button class="share-btn" onclick="shareBoard()">📋 Share</button>';
+    submissionBtn.innerHTML = '💡 Submit a Taylor-ism or phrase';
+  }
+
+  // Regenerate the board with new letters
+  generateNewBoard();
+}
+
+// Check URL for /jaygo and set initial theme
+function initializeTheme() {
+  const isJaygoUrl = window.location.search.includes('jaygo');
+  if (isJaygoUrl && currentTheme === 'taygo') {
+    toggleTheme();
+  }
+}
+
+// Initialize the game
+initializeTheme();
 generateNewBoard();

@@ -1,5 +1,4 @@
-// Taygo phrases - can appear in any column
-const phrases = [
+const taygoPhrases = [
   "appwrite hero",
   "mentions not being technical",
   "pepsi pat",
@@ -83,14 +82,96 @@ const phrases = [
   "kubernetes",
 ];
 
+const jaygoPhrases = [
+  "chat is blowing up / crazy",
+  "awesome",
+  "AI mentioned",
+  "ambassador program",
+  "conference talk",
+  "react js",
+  ".NET",
+  "laravel",
+  "javascript",
+  "react",
+  "vue",
+  "angular",
+  "svelte",
+  "java",
+  "python",
+  "ruby",
+  "content creation",
+  "you or your comment shouted out",
+  "jason roasts literally anyone",
+  "roxy's height",
+  "cursor",
+  "mcp",
+  "agentic",
+  "claude",
+  "openai",
+  "vscode",
+  "vim or neovim",
+  "open source",
+  "twitter",
+  "interviewing sucks",
+  "senior, staff, principal engineer",
+  "raise or promotion",
+  "rejection",
+  "linkedin",
+  "screenshare",
+  "job search",
+  "kubernetes",
+  "mutes to yell at someone",
+  "geez",
+  "f*ck",
+  "sh*t",
+  "a**hole",
+  "damn",
+  "absolutely",
+  "literally",
+  "at the end of the day",
+  "let's be honest",
+  "to be fair",
+  "mentions chip",
+  "mentions jack",
+  "roasts taylor",
+  "roasts angelos",
+  "80s reference",
+  "90s reference",
+  "2000s reference",
+  "shows off toys",
+  "discord audio issues",
+  "legos",
+  "talks shoes",
+  "talks movies or tv",
+  "talks food",
+  "rodchester ny",
+  "new york-ism",
+  "vibe coding",
+  "bolt",
+  "lovable",
+  "rates your resume",
+  "crocs",
+  "film industry",
+  "forgets to put a movie on",
+  "what are some wins",
+  "says something is dumb",
+  "drop your socials",
+  "yeah",
+  "buddy",
+  "troll",
+  "roll call"
+];
+
 // Function to get random phrases for a column
 function generatePhraseColumn(usedPhrases = new Set()) {
   const columnPhrases = [];
-  const availablePhrases = phrases.filter((phrase) => !usedPhrases.has(phrase));
+  // Use the appropriate phrases array based on current theme
+  const phrasesArray = currentTheme === 'jaygo' ? jaygoPhrases : taygoPhrases;
+  const availablePhrases = phrasesArray.filter((phrase) => !usedPhrases.has(phrase));
 
   // If we don't have enough unused phrases, reset and use any
   const phrasesToUse =
-    availablePhrases.length >= 5 ? availablePhrases : phrases;
+    availablePhrases.length >= 5 ? availablePhrases : phrasesArray;
 
   while (columnPhrases.length < 5) {
     const randomIndex = Math.floor(Math.random() * phrasesToUse.length);
