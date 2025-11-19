@@ -106,7 +106,11 @@
       </div>
 
       <div style="text-align: center; margin-top: 20px">
-        <button class="game-btn help-btn" onclick="openSubmissionModal()">
+        <button
+          class="game-btn help-btn"
+          onclick="openSubmissionModal()"
+          id="submissionBtn"
+        >
           💡 Submit a Taylor-ism or phrase
         </button>
       </div>
@@ -246,6 +250,45 @@
               maxlength="50"
               required
             />
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Who says it?</label>
+            <div class="radio-group">
+              <label class="radio-label">
+                <input
+                  type="radio"
+                  name="whoSaysIt"
+                  value="Taylor"
+                  class="radio-input"
+                  required
+                />
+                <span class="radio-custom"></span>
+                Taylor
+              </label>
+              <label class="radio-label">
+                <input
+                  type="radio"
+                  name="whoSaysIt"
+                  value="Jason"
+                  class="radio-input"
+                  required
+                />
+                <span class="radio-custom"></span>
+                Jason
+              </label>
+              <label class="radio-label">
+                <input
+                  type="radio"
+                  name="whoSaysIt"
+                  value="Both"
+                  class="radio-input"
+                  required
+                />
+                <span class="radio-custom"></span>
+                Both I guess idk
+              </label>
+            </div>
           </div>
 
           <div class="form-submit">

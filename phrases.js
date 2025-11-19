@@ -1,5 +1,5 @@
 // Taygo phrases - can appear in any column
-const phrases = [
+const taygoPhrases = [
   "appwrite hero",
   "mentions not being technical",
   "pepsi pat",
@@ -83,14 +83,103 @@ const phrases = [
   "kubernetes",
 ];
 
+// Jaygo phrases - can appear in any column
+const jaygoPhrases = [
+  "JSON head",
+  "fellow kids",
+  "being extra",
+  "spicy take",
+  "no cap",
+  "that's fire",
+  "low key",
+  "high key",
+  "it's giving",
+  "main character energy",
+  "touch grass",
+  "sus",
+  "periodt",
+  "slay",
+  "bet",
+  "facts",
+  "say less",
+  "understood the assignment",
+  "hits different",
+  "rent free",
+  "living for this",
+  "not the",
+  "the way I",
+  "I'm deceased",
+  "fam",
+  "bestie",
+  "chief",
+  "homie",
+  "bro",
+  "king",
+  "queen",
+  "icon",
+  "legend",
+  "moment",
+  "energy",
+  "vibes",
+  "mood",
+  "aesthetic",
+  "core",
+  "era",
+  "phase",
+  "arc",
+  "journey",
+  "glow up",
+  "level up",
+  "upgrade",
+  "rebrand",
+  "pivot",
+  "shift",
+  "transition",
+  "evolution",
+  "transformation",
+  "metamorphosis",
+  "character development",
+  "plot twist",
+  "narrative",
+  "storyline",
+  "backstory",
+  "lore",
+  "canon",
+  "headcanon",
+  "theory",
+  "conspiracy",
+  "discourse",
+  "drama",
+  "tea",
+  "spill",
+  "receipts",
+  "expose",
+  "call out",
+  "clap back",
+  "ratio",
+  "based",
+  "cringe",
+  "mid",
+  "bussin",
+  "sheesh",
+  "valid",
+  "invalid",
+  "unhinged",
+  "unmatched",
+  "different breed",
+  "built different"
+];
+
 // Function to get random phrases for a column
 function generatePhraseColumn(usedPhrases = new Set()) {
   const columnPhrases = [];
-  const availablePhrases = phrases.filter((phrase) => !usedPhrases.has(phrase));
+  // Use the appropriate phrases array based on current theme
+  const phrasesArray = currentTheme === 'jaygo' ? jaygoPhrases : taygoPhrases;
+  const availablePhrases = phrasesArray.filter((phrase) => !usedPhrases.has(phrase));
 
   // If we don't have enough unused phrases, reset and use any
   const phrasesToUse =
-    availablePhrases.length >= 5 ? availablePhrases : phrases;
+    availablePhrases.length >= 5 ? availablePhrases : phrasesArray;
 
   while (columnPhrases.length < 5) {
     const randomIndex = Math.floor(Math.random() * phrasesToUse.length);

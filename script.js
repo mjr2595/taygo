@@ -169,8 +169,8 @@ function shareBoard() {
       const cellKey = `${row}-${col}`;
       if (markedCells.has(cellKey)) {
         if (winningSquares.has(cellKey)) {
-          // Winning squares get potato emoji
-          rowText += "🥔";
+          // Winning squares get different emojis based on theme
+          rowText += currentTheme === 'jaygo' ? "😈" : "🥔";
         } else {
           // Other marked cells get dog square
           rowText += "🐶";
@@ -311,22 +311,44 @@ function closeSubmissionModal() {
 
 function submitPhrase() {
   const phrase = document.getElementById("phraseInput").value.trim();
+  const whoSaysItRadio = document.querySelector('input[name="whoSaysIt"]:checked');
   const submitBtn = document.querySelector('#submissionForm .game-btn');
   const errorDiv = document.getElementById('phraseError');
+  const radioErrorDiv = document.getElementById('radioError');
 
-  // Clear any existing error
+  // Clear any existing errors
   if (errorDiv) {
     errorDiv.remove();
   }
+  if (radioErrorDiv) {
+    radioErrorDiv.remove();
+  }
+
+  let hasError = false;
 
   if (!phrase) {
-    // Show red error text under the label
+    // Show red error text under the phrase input label
     const formGroup = document.querySelector('.form-group');
     const errorMsg = document.createElement('div');
     errorMsg.id = 'phraseError';
     errorMsg.className = 'error-message';
     errorMsg.textContent = 'This field is required duh';
     formGroup.appendChild(errorMsg);
+    hasError = true;
+  }
+
+  if (!whoSaysItRadio) {
+    // Show red error text under the radio group
+    const radioFormGroup = document.querySelector('.form-group:nth-of-type(2)');
+    const radioErrorMsg = document.createElement('div');
+    radioErrorMsg.id = 'radioError';
+    radioErrorMsg.className = 'error-message';
+    radioErrorMsg.textContent = 'Please select who says it';
+    radioFormGroup.appendChild(radioErrorMsg);
+    hasError = true;
+  }
+
+  if (hasError) {
     return;
   }
 
@@ -338,10 +360,12 @@ function submitPhrase() {
 
   const FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLSf9CX3v62hp0xEV3k6S4gSpATOsX0q2ETD9Fd4BsZWkw5pxqg/formResponse";
   const PHRASE_FIELD_ID = "entry.84924091";
+  const WHO_SAYS_IT_FIELD_ID = "entry.1680307727";
 
   // Submit to Google Forms
   const formData = new FormData();
   formData.append(PHRASE_FIELD_ID, phrase);
+  formData.append(WHO_SAYS_IT_FIELD_ID, whoSaysItRadio.value);
 
   fetch(FORM_URL, {
     method: "POST",
@@ -402,6 +426,7 @@ window.onclick = function (event) {
   const favicon = document.getElementById('favicon');
   const ogImage = document.getElementById('ogImage');
   const twitterImage = document.getElementById('twitterImage');
+  const submissionBtn = document.getElementById('submissionBtn');
 
   if (currentTheme === 'jaygo') {
     body.classList.add('jaygo-theme');
@@ -432,6 +457,7 @@ window.onclick = function (event) {
     `;
 
     winText.innerHTML = 'JAYGO!<br /><button class="share-btn" onclick="shareBoard()">📋 Share</button>';
+    submissionBtn.innerHTML = '💡 Submit a Jason-ism or phrase';
   } else {
     body.classList.remove('jaygo-theme');
     themeToggle.classList.remove('toggled');
@@ -461,6 +487,7 @@ window.onclick = function (event) {
     `;
 
     winText.innerHTML = 'TAYGO!<br /><button class="share-btn" onclick="shareBoard()">📋 Share</button>';
+    submissionBtn.innerHTML = '💡 Submit a Taylor-ism or phrase';
   }
 
   // Regenerate the board with new letters

@@ -640,6 +640,69 @@ h1 {
   line-height: 1.4;
 }
 
+.radio-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.radio-label {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  padding: 8px 12px;
+  border-radius: 8px;
+  transition: background-color 0.2s ease;
+  font-weight: normal;
+  color: #333;
+}
+
+.radio-label:hover {
+  background-color: #f8f9fa;
+}
+
+.radio-input {
+  margin: 0;
+  margin-right: 10px;
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border: 2px solid #ddd;
+  border-radius: 50%;
+  background-color: white;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.radio-input:checked {
+  border-color: #4834d4;
+  background-color: #4834d4;
+}
+
+.radio-input:checked::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: white;
+}
+
+.radio-input:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(72, 52, 212, 0.1);
+}
+
+.radio-custom {
+  display: none;
+}
+
 .error-message {
   color: #e74c3c;
   font-size: 0.9rem;
@@ -932,6 +995,28 @@ body.jaygo-theme {
 
 .jaygo-theme .form-label {
   color: #e0e0e0;
+}
+
+.jaygo-theme .radio-label {
+  color: #e0e0e0;
+}
+
+.jaygo-theme .radio-label:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.jaygo-theme .radio-input {
+  border: 2px solid #555;
+  background-color: #404040;
+}
+
+.jaygo-theme .radio-input:checked {
+  border-color: #ff6348;
+  background-color: #ff6348;
+}
+
+.jaygo-theme .radio-input:focus {
+  box-shadow: 0 0 0 3px rgba(255, 99, 72, 0.2);
 }
 
 .jaygo-theme .close:hover,
