@@ -20,7 +20,7 @@ An interactive bingo-style game designed to be played while watching Torc stream
 **Jason Torres**
 
 - **Twitch:** [jasonetorres](https://www.twitch.tv/jasonetorres)
-- **YouTube:** [@torcdotdev](https://www.youtube.com/@torcdotdev)
+- **YouTube:** [@torcdotdev](https://www.youtube.com/@torcdotdev/streams)
 
 ## Community
 

@@ -303,6 +303,13 @@ function closeHelpModal() {
 
 function openSubmissionModal() {
   document.getElementById("submissionModal").style.display = "block";
+
+  // Set default radio button selection based on current theme
+  const defaultWho = currentTheme === 'jaygo' ? 'Jason' : 'Taylor';
+  const radioButton = document.querySelector(`input[name="whoSaysIt"][value="${defaultWho}"]`);
+  if (radioButton) {
+    radioButton.checked = true;
+  }
 }
 
 function closeSubmissionModal() {
