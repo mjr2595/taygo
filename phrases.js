@@ -159,7 +159,12 @@ const jaygoPhrases = [
   "yeah",
   "buddy",
   "troll",
-  "roll call"
+  "roll call",
+  "whaddup",
+  "forgets to wear a hat",
+  "oh man",
+  "I'm not a hater",
+  "is being a hater",
 ];
 
 // Function to get random phrases for a column
