@@ -165,7 +165,12 @@ const jaygoPhrases = [
   "oh man",
   "I'm not a hater",
   "is being a hater",
+  "ufc",
+  "stranger things",
 ];
+
+console.log("taygo phrases:", taygoPhrases.length);
+console.log("jaygo phrases:", jaygoPhrases.length);
 
 // Function to get random phrases for a column
 function generatePhraseColumn(usedPhrases = new Set()) {

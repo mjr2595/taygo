@@ -386,6 +386,14 @@ function submitPhrase() {
     // Reset form but keep modal open for more submissions
     setTimeout(() => {
       document.getElementById("submissionForm").reset();
+
+      // Re-set the default radio button selection based on current theme
+      const defaultWho = currentTheme === 'jaygo' ? 'Jason' : 'Taylor';
+      const radioButton = document.querySelector(`input[name="whoSaysIt"][value="${defaultWho}"]`);
+      if (radioButton) {
+        radioButton.checked = true;
+      }
+
       // Reset button state
       submitBtn.textContent = originalText;
       submitBtn.style.background = originalBackground;
@@ -400,6 +408,14 @@ function submitPhrase() {
     // Reset form but keep modal open for more submissions
     setTimeout(() => {
       document.getElementById("submissionForm").reset();
+
+      // Re-set the default radio button selection based on current theme
+      const defaultWho = currentTheme === 'jaygo' ? 'Jason' : 'Taylor';
+      const radioButton = document.querySelector(`input[name="whoSaysIt"][value="${defaultWho}"]`);
+      if (radioButton) {
+        radioButton.checked = true;
+      }
+
       // Reset button state
       submitBtn.textContent = originalText;
       submitBtn.style.background = originalBackground;
