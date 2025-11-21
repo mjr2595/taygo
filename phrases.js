@@ -80,6 +80,7 @@ const taygoPhrases = [
   "a bad metaphor",
   "not handy",
   "kubernetes",
+  "torc boys"
 ];
 
 const jaygoPhrases = [
