@@ -437,6 +437,19 @@ window.onclick = function (event) {
 }; function toggleTheme() {
   currentTheme = currentTheme === 'taygo' ? 'jaygo' : 'taygo';
 
+  // Track Jaygo toggle count
+  if (currentTheme === 'jaygo') {
+    let jaygoToggleCount = parseInt(localStorage.getItem('jaygoToggleCount') || '0');
+    jaygoToggleCount++;
+    localStorage.setItem('jaygoToggleCount', jaygoToggleCount.toString());
+    
+    // Show tooltip after 3 toggles
+    if (jaygoToggleCount >= 3 && !localStorage.getItem('jaygoTooltipShown')) {
+      showJaygoTooltip();
+      localStorage.setItem('jaygoTooltipShown', 'true');
+    }
+  }
+
   const body = document.body;
   const themeToggle = document.getElementById('themeToggle');
   const toggleEmoji = document.getElementById('toggleEmoji');
@@ -515,6 +528,39 @@ window.onclick = function (event) {
 
   // Regenerate the board with new letters
   generateNewBoard();
+}
+
+function showJaygoTooltip() {
+  const tooltip = document.createElement('div');
+  tooltip.className = 'jaygo-tooltip';
+  tooltip.innerHTML = `
+    <div class="jaygo-tooltip-content">
+      <span class="jaygo-tooltip-close" onclick="closeJaygoTooltip()">&times;</span>
+      <p>💡 <strong>Pro tip:</strong> You can persist Jaygo mode by adding <code>?jaygo</code> to the end of the URL!</p>
+      <p style="margin-top: 10px; font-size: 0.9rem; opacity: 0.8;">Example: <code>taygo.netlify.app/?jaygo</code></p>
+    </div>
+  `;
+  document.body.appendChild(tooltip);
+  
+  // Fade in
+  setTimeout(() => {
+    tooltip.style.opacity = '1';
+  }, 10);
+  
+  // Auto-hide after 8 seconds
+  setTimeout(() => {
+    closeJaygoTooltip();
+  }, 8000);
+}
+
+function closeJaygoTooltip() {
+  const tooltip = document.querySelector('.jaygo-tooltip');
+  if (tooltip) {
+    tooltip.style.opacity = '0';
+    setTimeout(() => {
+      tooltip.remove();
+    }, 300);
+  }
 }
 
 // Check URL for /jaygo and set initial theme
